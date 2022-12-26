@@ -132,8 +132,11 @@ STATIC_URL = 'static/'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-        (...)
     ),
+}
+
+SIMPLE_JWT = {
+   'AUTH_HEADER_TYPES': ('JWT',),
 }
 
 DJOSER = {
@@ -147,14 +150,10 @@ DJOSER = {
     'PASSWORD_RESET_CONFIRM_URL': 'password/reset/{uid}/{token}',
     'USERNAME_RESET_CONFIRM_URL': 'email/reset/{uid}/{token}',
     'SERIALIZERS': {
-        'user': 'accounts.serializers.UserCreateSerializer',
-        'user_create': 'accounts.serializers.UserCreateSerializer',
+        'user': 'users.serializers.UserCreateSerializer',
+        'user_create': 'users.serializers.UserCreateSerializer',
         'user_delete': 'djoser.serializers.UserDeleteSerializer',
     }
-}
-
-SIMPLE_JWT = {
-   'AUTH_HEADER_TYPES': ('JWT',),
 }
 
 AUTH_USER_MODEL = 'users.UserAccount'
