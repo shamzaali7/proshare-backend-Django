@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'proshare_auth.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'prosharebackend',
+        'NAME': 'proshare_auth',
         'USER': 'syedhamzaali',
         'PASSWORD': 'Dnu99n393',
         'HOST': 'localhost',
@@ -90,7 +90,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'sico369@gmail.com'
-EMAIL_HOST_PASSWORD = 'iditdpfcncfxtmuv'
+EMAIL_HOST_PASSWORD = 'ivwnwbnrljcsxmuq'
 EMAIL_USE_TLS = True
 
 # Password validation
@@ -128,6 +128,34 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        (...)
+    ),
+}
+
+DJOSER = {
+    'LOGIN_FIELD': 'email',
+    'SEND_CONFIRMATION_EMAIL': True,
+    'PASSWORD_CHANGED_EMAIL_CONFIRMATION': True,
+    'USERNAME_CHANGED_EMAIL_CONFIRMATION': True,
+    'ACTIVATION_URL': 'activate/{uid}/{token}',
+    'USER_CREATE_PASSWORD_RETYPE': True,
+    'SET_PASSWORD-RETYPE': True,
+    'PASSWORD_RESET_CONFIRM_URL': 'password/reset/{uid}/{token}',
+    'USERNAME_RESET_CONFIRM_URL': 'email/reset/{uid}/{token}',
+    'SERIALIZERS': {
+        'user': 'accounts.serializers.UserCreateSerializer',
+        'user_create': 'accounts.serializers.UserCreateSerializer',
+        'user_delete': 'djoser.serializers.UserDeleteSerializer',
+    }
+}
+
+SIMPLE_JWT = {
+   'AUTH_HEADER_TYPES': ('JWT',),
+}
 
 AUTH_USER_MODEL = 'users.UserAccount'
 
